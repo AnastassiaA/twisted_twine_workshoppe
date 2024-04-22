@@ -122,6 +122,14 @@ class _FabricsUsedPageState extends State<FabricsUsedPage> {
       appBar: AppBar(
         title: const Text('Fabrics Used'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+              color: Colors.grey,
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateFabricsUsed();

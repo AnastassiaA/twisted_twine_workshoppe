@@ -126,6 +126,14 @@ class _KnittingNeedleUsedPageState extends State<KnittingNeedleUsedPage> {
       appBar: AppBar(
         title: const Text('Knitting Needle'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+              color: Colors.grey,
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateNeedlesUsed();

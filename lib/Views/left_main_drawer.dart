@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/backup_and_restore_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/crochet_hook_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/fabric_page.dart';
+import 'package:twisted_twine_workshopppe/Views/Views/history_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/idea_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/other_fibres_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/product_catalogue_page.dart';
@@ -83,7 +84,6 @@ class LeftMainDrawer extends StatelessWidget {
               );
             },
           ),
-
           ListTile(
             leading: const Icon(Icons.checklist_rounded),
             title: const Text('Projects'),
@@ -95,36 +95,29 @@ class LeftMainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.checklist_rounded),
+            leading: const Icon(Icons.sticky_note_2_outlined),
             title: const Text('Ideas'),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const IdeaPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const IdeaPage()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.history),
             title: const Text('History'),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           context) => const TodoPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HistoryPage()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.check),
             title: const Text('To Do'),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TodoPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const TodoPage()));
             },
           ),
-          
           ListTile(
             leading: const Icon(Icons.grass_rounded),
             title: const Text('Yarn'),
@@ -181,7 +174,6 @@ class LeftMainDrawer extends StatelessWidget {
                       builder: (context) => const CrochetHookPage()));
             },
           ),
-
           ListTile(
             leading: const Icon(Icons.content_cut),
             title: const Text('Trimmings'),
@@ -198,6 +190,27 @@ class LeftMainDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const ToolsPage()));
+            },
+          ),
+          
+          ListTile(
+            leading: const Icon(Icons.collections_bookmark_outlined),
+            title: const Text('Product Catalogue'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProductCataloguePage()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.library_books_outlined),
+            title: const Text('Pattern Library'),
+            onTap: () {
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const AccountingPage()));
             },
           ),
           ListTile(
@@ -221,17 +234,7 @@ class LeftMainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.collections_bookmark_outlined),
-            title: const Text('Product Catalogue'),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProductCataloguePage()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.miscellaneous_services),
+            leading: const Icon(Icons.backup_outlined),
             title: const Text('Backup and Restore'),
             onTap: () {
               Navigator.push(
@@ -241,7 +244,7 @@ class LeftMainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings_applications_outlined),
+            leading: const Icon(Icons.settings_outlined),
             title: const Text('Settings'),
             onTap: () {
               Navigator.push(
@@ -250,8 +253,6 @@ class LeftMainDrawer extends StatelessWidget {
                       builder: (context) => const SettingsPage()));
             },
           ),
-
-          //TDDO: make drawer auto adjust to different sized devices
         ],
       ),
     );

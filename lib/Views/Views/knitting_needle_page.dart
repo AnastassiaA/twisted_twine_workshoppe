@@ -228,6 +228,14 @@ class _KnittingNeedlePageState extends State<KnittingNeedlePage> {
       appBar: AppBar(
         title: const Text("Knitting Needles"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

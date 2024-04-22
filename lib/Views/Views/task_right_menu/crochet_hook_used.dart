@@ -123,6 +123,14 @@ class _CrochetHookUsedPageState extends State<CrochetHookUsedPage> {
       appBar: AppBar(
         title: const Text('Crochet Hook'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateHooksUsed();

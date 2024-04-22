@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:twisted_twine_workshopppe/Controllers/backup_and_restore_controller.dart';
 import 'package:twisted_twine_workshopppe/Controllers/database.dart';
 
 class BackupAndRestorePage extends StatelessWidget {
@@ -35,15 +36,16 @@ class BackupAndRestorePage extends StatelessWidget {
                           actions: [
                             ElevatedButton(
                               onPressed: () async {
-                                 //await SQLHelper.deleteDatabase();
-                                // Navigator.pop(
-                                //   context,
-                                // );
+                                 
+                                Navigator.pop(
+                                  context,
+                                );
                               },
                               child: const Text("No"),
                             ),
                             ElevatedButton(
                               onPressed: () {
+                                BackupAndRestoreController.deleteDatabase();
                                 Navigator.pop(
                                   context,
                                 );

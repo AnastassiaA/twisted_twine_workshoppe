@@ -140,6 +140,14 @@ class _CrochetThreadUsedPageState extends State<CrochetThreadUsedPage> {
       appBar: AppBar(
         title: const Text('Crochet Thread'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateThreadUsed();

@@ -190,6 +190,14 @@ class _ToolsPageState extends State<ToolsPage> {
       appBar: AppBar(
         title: const Text("Tools"),
         actions: const [
+          Tooltip(
+            message: 'Long press to delete' '\n\n' 'Double tap to edit',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

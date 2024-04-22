@@ -139,6 +139,14 @@ class _OtherFibresUsedPageState extends State<OtherFibresUsedPage> {
       appBar: AppBar(
         title: const Text('Other Fibres Used'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+              color: Colors.grey,
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateFibreUsed();

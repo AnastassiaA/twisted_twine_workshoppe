@@ -193,6 +193,12 @@ class _IdeaPageState extends State<IdeaPage> {
       appBar: AppBar(
         title: const Text("Ideas"),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+            ),
+          ),
           const IconButton(onPressed: null, icon: Icon(Icons.sort)),
           IconButton(
               onPressed: () {
@@ -215,46 +221,46 @@ class _IdeaPageState extends State<IdeaPage> {
                       form(ideaList[index].recordId);
                     },
                     onLongPress: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: Text('Delete '
-                                    '"'
-                                    '${ideaList[index].ideaName}'
-                                    '"'),
-                                content: const Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Are you sure?'),
-                                  ],
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(
-                                        context,
-                                      );
-                                    },
-                                    child: const Text('Cancel'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      deleteIdea(
-                                          idea: ideaList[index],
-                                          context: context);
-
-                                      Navigator.pop(
-                                        context,
-                                      );
-                                    },
-                                    child: const Text('Delete'),
-                                  ),
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Delete '
+                                  '"'
+                                  '${ideaList[index].ideaName}'
+                                  '"'),
+                              content: const Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Are you sure?'),
                                 ],
-                              );
-                            });
-                      },
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    deleteIdea(
+                                        idea: ideaList[index],
+                                        context: context);
+
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  },
+                                  child: const Text('Delete'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
                     child: Column(
                       children: [
                         Image.memory(

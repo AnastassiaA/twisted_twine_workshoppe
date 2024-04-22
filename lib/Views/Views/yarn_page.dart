@@ -54,6 +54,14 @@ class _YarnPageState extends State<YarnPage> {
       appBar: AppBar(
         title: const Text("Yarn"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

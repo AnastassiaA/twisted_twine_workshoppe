@@ -112,6 +112,16 @@ class _KnittingNeedleTypePageState extends State<KnittingNeedleTypePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Knitting Needle Type"),
+        actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
+        ],
       ),
       body: isLoading ?
       const Center(

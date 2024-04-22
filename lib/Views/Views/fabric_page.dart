@@ -202,6 +202,14 @@ class _FabricsPageState extends State<FabricsPage> {
       appBar: AppBar(
         title: const Text("Fabrics"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

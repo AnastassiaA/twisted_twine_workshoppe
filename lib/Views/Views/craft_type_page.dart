@@ -109,7 +109,17 @@ class _CraftTypePageState extends State<CraftTypePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Craft Type")),
+      appBar: AppBar(title: const Text("Craft Type"),
+      actions: const [
+        Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
+      ],),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),

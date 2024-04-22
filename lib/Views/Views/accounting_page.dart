@@ -11,6 +11,16 @@ class AccountingPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            actions: const [
+              Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
+            ],
             title: const Text("Accounting"),
             bottom: const TabBar(
               tabs: [

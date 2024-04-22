@@ -106,9 +106,16 @@ class _CommissionsPageState extends State<CommissionsPage> {
       ),
     ];
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( 
         title: const Text("Commissions"),
         actions: [
+          const Tooltip(
+            message: 'Long press to delete' '\n\n' 'Tap to see more details',
+            child: Icon(
+              Icons.help,
+            ),
+            
+          ),
           PopupMenuButton(
               icon: const Icon(
                 Icons.sort,

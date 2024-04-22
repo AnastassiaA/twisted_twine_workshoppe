@@ -11,6 +11,7 @@ class MiscellaneousPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Miscellaneous"),
+          actions: const [],
         ),
         body: ListView(
           children: [
@@ -34,7 +35,6 @@ class MiscellaneousPage extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => const CraftTypePage())),
             ),
-            
             const ListTile(
               title: Text("Infographics and Charts"),
             ),

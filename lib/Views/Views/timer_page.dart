@@ -87,6 +87,7 @@ class _TimerPageState extends State<TimerPage> {
       appBar: AppBar(
         title: const Text("Timer"),
         actions: [
+          
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -281,6 +282,14 @@ class _TimerListState extends State<TimerList> {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Times"), actions: const [
+        Tooltip(
+            message: 'Long press to delete' '\n\n' 'Edit feature coming soon',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
         IconButton(onPressed: null, icon: Icon(Icons.sort)),
         // IconButton(
         //     onPressed: () {
@@ -306,47 +315,14 @@ class _TimerListState extends State<TimerList> {
               itemBuilder: ((context, index) {
                 return Card(
                   child: GestureDetector(
-                    onDoubleTap: () {
-                      showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Delete '
-                                    '"'
-                                    'Time Slot'
-                                    '"'),
-                                content: const Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Are you sure?'),
-                                  ],
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(
-                                        context,
-                                      );
-                                    },
-                                    child: const Text('Cancel'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      deleteTime(
-                                          time: timeList[index],
-                                          context: context);
-
-                                      Navigator.pop(
-                                        context,
-                                      );
-                                    },
-                                    child: const Text('Delete'),
-                                  ),
-                                ],
-                              );
-                            });
-                    },
+                    // onDoubleTap: () {
+                    //   showDialog(
+                    //         context: context,
+                    //         builder: (context) {
+                    //           return 
+                               //TODO: figure out how to do an exact time difference calculation
+                            // });
+                    // },
                     onLongPress: () {
                       showDialog(
                             context: context,

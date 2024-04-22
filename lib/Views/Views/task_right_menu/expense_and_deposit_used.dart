@@ -247,6 +247,16 @@ class _ExpenseDepositUsedPageState extends State<ExpenseDepositUsedPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expenses and Deposits"),
+       actions: const[
+       Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+              color: Colors.grey,
+            ),
+            
+          ),
+       ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

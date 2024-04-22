@@ -58,6 +58,14 @@ class _CrochetThreadPageState extends State<CrochetThreadPage> {
       appBar: AppBar(
         title: const Text("Crochet Thread"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

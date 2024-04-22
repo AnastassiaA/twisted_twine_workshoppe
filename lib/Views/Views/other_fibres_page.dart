@@ -217,6 +217,14 @@ class _OtherFibresPageState extends State<OtherFibresPage> {
       appBar: AppBar(
         title: const Text("Other Fibres"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),

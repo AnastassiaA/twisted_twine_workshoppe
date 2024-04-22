@@ -143,6 +143,14 @@ class _TrimmingsUsedPageState extends State<TrimmingsUsedPage> {
       appBar: AppBar(
         title: const Text('Trimmings Used'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+              color: Colors.grey,
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateTrimmingsUsed();

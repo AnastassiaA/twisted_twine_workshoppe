@@ -151,6 +151,14 @@ class _YarnUsedPageState extends State<YarnUsedPage> {
       appBar: AppBar(
         title: const Text('Yarn Used'),
         actions: [
+          const Tooltip(
+            message: '',
+            child: Icon(
+              Icons.help,
+              
+            ),
+            
+          ),
           IconButton(
               onPressed: () async {
                 await _updateYarnUsed();

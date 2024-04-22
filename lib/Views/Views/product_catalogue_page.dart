@@ -58,6 +58,14 @@ class _ProductCataloguePageState extends State<ProductCataloguePage> {
       appBar: AppBar(
         title: const Text('Catalogue'),
         actions: [
+          const Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           const IconButton(onPressed: null, icon: Icon(Icons.sort)),
           IconButton(
               onPressed: () {

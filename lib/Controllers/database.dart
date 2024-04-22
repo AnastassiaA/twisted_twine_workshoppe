@@ -1,10 +1,11 @@
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart';
-import 'package:twisted_twine_workshopppe/Models/Const/idea_const.dart';
+import 'package:twisted_twine_workshopppe/Models/Const/history_const.dart';
+import '../Models/Const/idea_const.dart';
 
-import 'package:twisted_twine_workshopppe/Models/Const/product_catalogue_const.dart';
-import 'package:twisted_twine_workshopppe/Models/Const/todo_const.dart';
+import '../Models/Const/product_catalogue_const.dart';
+import '../Models/Const/todo_const.dart';
 import '../Models/Const/expense_used_const.dart';
 import '../Models/Const/fabrics_const.dart';
 import '../Models/Const/fabrics_used_const.dart';
@@ -300,6 +301,16 @@ class SQLHelper {
       ${TodoConst.todo} TEXT,
       ${TodoConst.isComplete} INTEGER
     )""");
+
+    await database.execute("""CREATE TABLE ${HistoryConst.tableName} (
+      ${HistoryConst.historyId} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      ${HistoryConst.name} TEXT,
+      ${HistoryConst.completionStatus} INTEGER,
+      ${HistoryConst.craftType} TEXT,
+      ${HistoryConst.monthYear} TEXT,
+      ${HistoryConst.description} TEXT
+      
+    )""");
   }
 
   static Future<sql.Database> db() async {
@@ -313,9 +324,8 @@ class SQLHelper {
     await db.execute('pragma foreign_keys = on');
   }
 
-  static Future<void> getDBPath() async {
-    var databasePath = await sql.getDatabasesPath();
-    String path = join(databasePath, 'twistedtwinecommissions.db');
+  static Future<String> getDBPath() async {
+    return join(await sql.getDatabasesPath(), 'twistedtwinecommissions.db');
     //Directory? externalStoragePath = await sql.getExternalStorageDirectory();
   }
 

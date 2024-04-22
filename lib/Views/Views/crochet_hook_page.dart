@@ -190,6 +190,14 @@ class _CrochetHookPageState extends State<CrochetHookPage> {
       appBar: AppBar(
         title: const Text("Crochet Hooks"),
         actions: const [
+          Tooltip(
+            message: 'Long press a commission to delete',
+            child: Icon(
+              Icons.help,
+
+            ),
+            
+          ),
           IconButton(onPressed: null, icon: Icon(Icons.sort)),
         ],
       ),
