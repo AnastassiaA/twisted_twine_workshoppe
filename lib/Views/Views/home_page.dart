@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twisted_twine_workshopppe/Controllers/home_page_controller.dart';
 import '../left_main_drawer.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,16 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-//create a staggard grid to contain
-//# of inprogress and pending orders
-//business wallet
-//expense
-//income
-//transfer in
-//transfer out
+//orientationBuilder
 
   double income = 0.0, expense = 0.0, incoming = 0.0, outgoing = 0.0;
-  String wallet = '';
+  double wallet = 0.0;
   int pending = 0, current = 0;
 
   Future homePage() async {
@@ -67,11 +60,11 @@ class _HomePageState extends State<HomePage> {
       // outgoing.toStringAsFixed(2);
 
       double sum = ((income + incoming) - (expense + outgoing));
-      
+
       if (sum.isNegative) {
-        wallet = '0.00';
+        wallet = 0.00;
       } else {
-        wallet = sum.toStringAsFixed(2);
+        wallet = sum;
       }
     });
   }
@@ -82,384 +75,842 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final screenLength = MediaQuery.of(context).size.height;
-    //can i use this to ascertain how many cells will fit the screen length?
-
-    return Scaffold(
-      //extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: const Text(
-          'Twisted Twine Workshoppe',
-        ),
-        //backgroundColor: const Color(0xffe7d0f5),
-      ),
-      drawer: const LeftMainDrawer(),
-      body: Container(
-        //height: screenLength,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-              //Color(0xffefdff9),
-              Color(0xffe7d0f5),
-              Color(0xff301934)
-              // Color(0xffC079D9),
-              // Color(0xffB26CCE),
-              // Color(0xffA460C3),
-              // Color(0xff9653B8),
-            ])),
-        child: StaggeredGrid.count(
-          crossAxisCount: 8,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          children: [
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 6,
-              //(MediaQuery.of(context).size.height / 6),
-              child: Container(
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                  image: const DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage('images/order_inprogress.jpeg'),
+  Widget _flexiblePortraitLayout() {
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+            //Color(0xffefdff9),
+            Color(0xffe7d0f5),
+            Color(0xff301934)
+            // Color(0xffC079D9),
+            // Color(0xffB26CCE),
+            // Color(0xffA460C3),
+            // Color(0xff9653B8),
+          ])),
+      child: Column(
+        children: [
+          Flexible(
+            flex: 6,
+            child: SizedBox(
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 5,
                   ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Commissions',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text('Commissions',
-                            style: TextStyle(fontSize: 25, color: Colors.white))
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          '$current',
-                          style: TextStyle(
-                            fontSize: 90,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        Text(
-                          '$current',
-                          style: const TextStyle(
-                              fontSize: 90, color: Colors.white),
-                        )
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          'In Progress',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text(
-                          'In Progress',
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                    image: const DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: AssetImage('images/income.jpeg'),
-                    )),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Income',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text('Income',
-                            style: TextStyle(fontSize: 25, color: Colors.white))
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          '\$' '$income',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        Text('\$' '$income',
-                            style: const TextStyle(
-                                fontSize: 25, color: Colors.white))
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 6,
-              child: Container(
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                  image: const DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage('images/orders_pending.jpeg'),
-                  ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Commissions',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text('Commissions',
-                            style: TextStyle(fontSize: 25, color: Colors.white))
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          '$pending',
-                          style: TextStyle(
-                            fontSize: 90,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        Text('$pending',
-                            style: const TextStyle(
-                                fontSize: 90, color: Colors.white))
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Text(
-                          'Pending',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text('Pending',
-                            style: TextStyle(fontSize: 25, color: Colors.white))
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 2,
-              child: Container(
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                    image: const DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: AssetImage('images/money_in.jpeg'),
-                    )),
-                child: Center(
-                  child: Stack(
+                  Column(
                     children: [
-                      Text(
-                        'In: ' '\$' '$incoming',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 4
-                            ..color = Colors.deepPurple,
+                      Flexible(
+                        flex: 3,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffE5B80B), width: 3.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('images/order_inprogress.jpeg'),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Commissions',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Commissions',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '$current',
+                                    style: TextStyle(
+                                      fontSize: 80,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text(
+                                    '$current',
+                                    style: const TextStyle(
+                                        fontSize: 80, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    'In Progress',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'In Progress',
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      Text('In: ' '\$' '$incoming',
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white))
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color(0xffE5B80B), width: 3.0),
+                              image: const DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('images/money_in.jpeg'),
+                              )),
+                          child: Center(
+                            child: Stack(
+                              children: [
+                                Text(
+                                  'In: ' '\$' '$incoming',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth = 4
+                                      ..color = Colors.deepPurple,
+                                  ),
+                                ),
+                                Text('In: ' '\$' '$incoming',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color(0xffE5B80B), width: 3.0),
+                              image: const DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('images/expense.jpeg'),
+                              )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Expense',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Expense',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '\$' '$expense',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text('\$' '$expense',
+                                      style: const TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color(0xffE5B80B), width: 3.0),
+                              image: const DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('images/income.jpeg'),
+                              )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Income',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Income',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '\$' '$income',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text('\$' '$income',
+                                      style: const TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Flexible(
+                        flex: 3,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffE5B80B), width: 3.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('images/orders_pending.jpeg'),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Commissions',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Commissions',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '$pending',
+                                    style: TextStyle(
+                                      fontSize: 90,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text('$pending',
+                                      style: const TextStyle(
+                                          fontSize: 90, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Pending',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Pending',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox( 
+                        height: 10,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2 - 10,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffE5B80B), width: 3.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('images/out_red_arrow.jpeg'),
+                            ),
+                          ),
+                          child: Center(
+                            child: Stack(
+                              children: [
+                                Text(
+                                  'Out: ' '\$' '$outgoing',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth = 4
+                                      ..color = Colors.deepPurple,
+                                  ),
+                                ),
+                                Text('Out: ' '\$' '$outgoing',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 4,
-              child: Container(
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                    image: const DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: AssetImage('images/expense.jpeg'),
-                    )),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          ),
+          const SizedBox(height: 10),
+          Flexible(
+            flex: 1,
+            child: Container(
+              width: MediaQuery.of(context).size.width - 10,
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xffE5B80B), width: 3.0),
+                image: const DecorationImage(
+                  fit: BoxFit.fitWidth,
+                  image: AssetImage('images/ttc_wallet.jpeg'),
+                ),
+              ),
+              child: Center(
+                child: Stack(
                   children: [
-                    Stack(
-                      children: [
-                        Text(
-                          'Expense',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        const Text('Expense',
-                            style: TextStyle(fontSize: 25, color: Colors.white))
-                      ],
+                    Text(
+                      'Wallet: ' '\$' '$wallet',
+                      style: TextStyle(
+                        fontSize: 25,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 4
+                          ..color = Colors.teal,
+                      ),
                     ),
-                    Stack(
-                      children: [
-                        Text(
-                          '\$' '$expense',
-                          style: TextStyle(
-                            fontSize: 25,
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 4
-                              ..color = Colors.teal,
-                          ),
-                        ),
-                        Text('\$' '$expense',
-                            style: const TextStyle(
-                                fontSize: 25, color: Colors.white))
-                      ],
-                    ),
+                    Text('Wallet: ' '\$' '$wallet',
+                        style:
+                            const TextStyle(fontSize: 25, color: Colors.white))
                   ],
                 ),
               ),
             ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 4,
-              mainAxisCellCount: 2,
-              child: Container(
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                  image: const DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage('images/out_red_arrow.jpeg'),
-                  ),
-                ),
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Text(
-                        'Out: ' '\$' '$outgoing',
-                        style: TextStyle(
-                          fontSize: 20,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 4
-                            ..color = Colors.deepPurple,
-                        ),
-                      ),
-                      Text('Out: ' '\$' '$outgoing',
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white))
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            StaggeredGridTile.count(
-              crossAxisCellCount: 8,
-              mainAxisCellCount: 2,
-              child: Container(
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: const Color(0xffE5B80B), width: 3.0),
-                  image: const DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage('images/ttc_wallet.jpeg'),
-                  ),
-                ),
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Text(
-                        'Wallet: ' '\$' '$wallet',
-                        style: TextStyle(
-                          fontSize: 25,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 4
-                            ..color = Colors.teal,
-                        ),
-                      ),
-                      Text('Wallet: ' '\$' '$wallet',
-                          style: const TextStyle(
-                              fontSize: 25, color: Colors.white))
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
       ),
     );
+  }
+
+  Widget _flexibleLandscapeLayout() {
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+          Color(0xffe7d0f5),
+            Color(0xff301934)
+            
+          ])),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                //wallet
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xffE5B80B), width: 3.0),
+                      image: const DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage('images/ttc_wallet.jpeg'),
+                      ),
+                    ),
+                    child: Center(
+                      child: Stack(
+                        children: [
+                          Text(
+                            'Wallet: ' '\$' '$wallet',
+                            style: TextStyle(
+                              fontSize: 25,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 4
+                                ..color = Colors.teal,
+                            ),
+                          ),
+                          Text('Wallet: ' '\$' '$wallet',
+                              style: const TextStyle(
+                                  fontSize: 25, color: Colors.white))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Flexible(
+                  flex: 3,
+                  child: SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const SizedBox(width: 5),
+                        //in progress
+                        Container(
+                          width: MediaQuery.of(context).size.width / 4 - 5,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffE5B80B), width: 3.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('images/order_inprogress.jpeg'),
+                            ),
+                          ),        
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Commissions',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Commissions',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '$current',
+                                    style: TextStyle(
+                                      fontSize: 80,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text(
+                                    '$current',
+                                    style: const TextStyle(
+                                        fontSize: 80, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    'In Progress',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),  
+                                  ),
+                                  const Text(
+                                    'In Progress',
+                                    style: TextStyle(
+                                        fontSize: 25, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        //pending
+                        Container(
+                          width: MediaQuery.of(context).size.width / 4 - 5,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color(0xffE5B80B), width: 3.0),
+                            image: const DecorationImage(
+                              fit: BoxFit.fitWidth,
+                              image: AssetImage('images/orders_pending.jpeg'),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Commissions',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Commissions',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    '$pending',
+                                    style: TextStyle(
+                                      fontSize: 80,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  Text('$pending',
+                                      style: const TextStyle(
+                                          fontSize: 80, color: Colors.white))
+                                ],
+                              ),
+                              Stack(
+                                children: [
+                                  Text(
+                                    'Pending',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = Colors.teal,
+                                    ),
+                                  ),
+                                  const Text('Pending',
+                                      style: TextStyle(
+                                          fontSize: 25, color: Colors.white))
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 5),
+              ],
+            ),
+          ),
+          const SizedBox(width: 5),
+          SizedBox(
+            child: Column(
+              children: [
+                //income
+                Flexible(
+                  flex: 3,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 4 - 5,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color(0xffE5B80B), width: 3.0),
+                        image: const DecorationImage(
+                          fit: BoxFit.fitWidth,
+                          image: AssetImage('images/income.jpeg'),
+                        )),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Stack(
+                          children: [
+                            Text(
+                              'Income',
+                              style: TextStyle(
+                                fontSize: 25,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = Colors.teal,
+                              ),
+                            ),
+                            const Text('Income',
+                                style: TextStyle(
+                                    fontSize: 25, color: Colors.white))
+                          ],
+                        ),
+                        Stack(
+                          children: [
+                            Text(
+                              '\$' '$income',
+                              style: TextStyle(
+                                fontSize: 25,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = Colors.teal,
+                              ),
+                            ),
+                            Text('\$' '$income',
+                                style: const TextStyle(
+                                    fontSize: 25, color: Colors.white))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                //out
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 4 - 5,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xffE5B80B), width: 3.0),
+                      image: const DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage('images/out_red_arrow.jpeg'),
+                      ),
+                    ),
+                    child: Center(
+                      child: Stack(
+                        children: [
+                          Text(
+                            'Out: ' '\$' '$outgoing',
+                            style: TextStyle(
+                              fontSize: 20,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 4
+                                ..color = Colors.deepPurple,
+                            ),
+                          ),
+                          Text('Out: ' '\$' '$outgoing',
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(width: 5),
+          SizedBox(
+              child: Column(
+            children: [
+              //in
+              Flexible(
+                flex: 1,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 4 - 5,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xffE5B80B), width: 3.0),
+                      image: const DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage('images/money_in.jpeg'),
+                      )),
+                  child: Center(
+                    child: Stack(
+                      children: [
+                        Text(
+                          'In: ' '\$' '$incoming',
+                          style: TextStyle(
+                            fontSize: 20,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 4
+                              ..color = Colors.deepPurple,
+                          ),
+                        ),
+                        Text('In: ' '\$' '$incoming',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              //expense
+              Flexible(
+                flex: 3,
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 4 - 5,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xffE5B80B), width: 3.0),
+                      image: const DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage('images/expense.jpeg'),
+                      )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Stack(
+                        children: [
+                          Text(
+                            'Expense',
+                            style: TextStyle(
+                              fontSize: 25,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 4
+                                ..color = Colors.teal,
+                            ),
+                          ),
+                          const Text('Expense',
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white))
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Text(
+                            '\$' '$expense',
+                            style: TextStyle(
+                              fontSize: 25,
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 4
+                                ..color = Colors.teal,
+                            ),
+                          ),
+                          Text('\$' '$expense',
+                              style: const TextStyle(
+                                  fontSize: 25, color: Colors.white))
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          )),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        //extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: const Text(
+            'Twisted Twine Workshoppe',
+          ),
+          //backgroundColor: const Color(0xffe7d0f5),
+        ),
+        drawer: const LeftMainDrawer(),
+        body: OrientationBuilder(builder: (context, orientation) {
+          return orientation == Orientation.portrait
+              ? _flexiblePortraitLayout()
+              : _flexibleLandscapeLayout();
+        }));
   }
 }

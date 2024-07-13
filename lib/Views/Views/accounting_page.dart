@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/expense_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/income_page.dart';
+import 'package:twisted_twine_workshopppe/Views/Views/payment_methods_page.dart';
 
 class AccountingPage extends StatelessWidget {
   const AccountingPage({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class AccountingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             actions: const [
@@ -29,6 +30,9 @@ class AccountingPage extends StatelessWidget {
                 ),
                 Tab(
                   child: Text("Income"),
+                ),
+                Tab(
+                  child: Icon(Icons.credit_card_outlined),
                 )
               ],
             ),
@@ -37,6 +41,7 @@ class AccountingPage extends StatelessWidget {
             children: [
               ExpensePage(),
               IncomePage(),
+              PaymentMethodsPage(),
             ],
           ),
         ));

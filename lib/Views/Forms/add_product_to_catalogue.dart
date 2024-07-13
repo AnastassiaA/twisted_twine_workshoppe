@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:twisted_twine_workshopppe/Controllers/product_catalogue_controller.dart';
 import 'package:twisted_twine_workshopppe/Models/Models/product_catalogue_model.dart';
-import 'package:twisted_twine_workshopppe/Views/TimePicker/time_picker.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/product_catalogue_page.dart';
 
 class AddProductToCatalogue extends StatefulWidget {

@@ -102,11 +102,12 @@ class _CommissionsPageState extends State<CommissionsPage> {
               Text("Start Date"),
             ],
           ),
+
         ),
       ),
     ];
     return Scaffold(
-      appBar: AppBar( 
+      appBar: AppBar(
         title: const Text("Commissions"),
         actions: [
           const Tooltip(
@@ -114,7 +115,6 @@ class _CommissionsPageState extends State<CommissionsPage> {
             child: Icon(
               Icons.help,
             ),
-            
           ),
           PopupMenuButton(
               icon: const Icon(
@@ -160,8 +160,7 @@ class _CommissionsPageState extends State<CommissionsPage> {
                           return AlertDialog(
                             title: Text('Delete '
                                 '"'
-                                '${commissionsList[index].taskName}'
-                                '"'),
+                                '${commissionsList[index].taskName}"'),
                             content: const Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,

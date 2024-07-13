@@ -3,8 +3,8 @@ import 'package:twisted_twine_workshopppe/Controllers/row_controller.dart';
 import 'package:twisted_twine_workshopppe/Models/Models/row_model.dart';
 
 class RowCounter extends StatefulWidget {
-  int taskNumber;
-  RowCounter(this.taskNumber, {super.key});
+  final int taskNumber;
+  const RowCounter(this.taskNumber, {super.key});
 
   @override
   State<RowCounter> createState() => _CounterState();

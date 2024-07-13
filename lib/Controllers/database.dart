@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart';
-import 'package:twisted_twine_workshopppe/Models/Const/history_const.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:twisted_twine_workshopppe/Models/Const/pattern_library_const.dart';
+
+
+import '../Models/Const/history_const.dart';
 import '../Models/Const/idea_const.dart';
 
 import '../Models/Const/product_catalogue_const.dart';
@@ -311,6 +317,13 @@ class SQLHelper {
       ${HistoryConst.description} TEXT
       
     )""");
+
+    await database.execute("""CREATE TABLE ${PatternLibraryConst.tableName} (
+      ${PatternLibraryConst.patternId} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      ${PatternLibraryConst.patternName} TEXT,
+      ${PatternLibraryConst.patternType} TEXT,
+      ${PatternLibraryConst.patternLink} TEXT
+    )""");
   }
 
   static Future<sql.Database> db() async {
@@ -326,9 +339,10 @@ class SQLHelper {
 
   static Future<String> getDBPath() async {
     return join(await sql.getDatabasesPath(), 'twistedtwinecommissions.db');
-    //Directory? externalStoragePath = await sql.getExternalStorageDirectory();
   }
 
+  
+  //TODO: Check if the method below works
   static Future<void> backupDatabase() async {
     var externalStatus = await Permission.manageExternalStorage.status;
 
@@ -343,8 +357,65 @@ class SQLHelper {
     }
   }
 
-  // static Future<void> deleteDatabase() async {
 
-  //   return await sql.deleteDatabase(path);
-  // }
+  //Here's some raw code to possibly derive a solution from
+//   import 'package:csv/csv.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// void main() {
+// runApp(const MyApp());
+// }
+// class MyApp extends StatelessWidget {
+// const MyApp({Key? key}) : super(key: key);
+// @override
+// Widget build(BuildContext context) {
+// return const MaterialApp(
+// home: ReadCsvFile(),
+// );
+// }
+// }
+// class ReadCsvFile extends StatefulWidget {
+// const ReadCsvFile({Key? key}) : super(key: key);
+// @override
+// _ReadCsvFileState createState() => _ReadCsvFileState();
+// }
+// class _ReadCsvFileState extends State<readcsvfile> {
+// List<list<dynamic>> _data = [];
+// @override
+// void initState() {
+// super.initState();
+// _loadCSV();
+// }
+// void _loadCSV() async {
+// final rawData = await rootBundle.loadString("assets/test.csv");
+// List<list<dynamic>> listData = const CsvToListConverter().convert(rawData);
+// setState(() {
+// _data = listData;
+// });
+// }
+// @override
+// Widget build(BuildContext context) {
+// return Scaffold(
+// appBar: AppBar(
+// title: const Text("read csv file"),
+// ),
+// body: ListView.builder(
+// itemCount: _data.length,
+// itemBuilder: (_, index) {
+// return Card(
+// margin: const EdgeInsets.all(3),
+// color: Colors.white,
+// child: ListTile(
+// leading: Text(_data[index][0].toString()),
+// title: Text(_data[index][1]),
+// trailing: Text(_data[index][2].toString()),
+// ),
+// );
+// },
+// ));
+// }
+// }
+// </list<dynamic></list<dynamic></readcsvfile>
+
+
 }

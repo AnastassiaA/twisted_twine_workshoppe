@@ -5,6 +5,7 @@ import 'package:twisted_twine_workshopppe/Views/Views/fabric_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/history_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/idea_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/other_fibres_page.dart';
+import 'package:twisted_twine_workshopppe/Views/Views/pattern_library_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/product_catalogue_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/settings_page.dart';
 import 'package:twisted_twine_workshopppe/Views/Views/timer_page.dart';
@@ -203,16 +204,16 @@ class LeftMainDrawer extends StatelessWidget {
                       builder: (context) => const ProductCataloguePage()));
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.library_books_outlined),
-            title: const Text('Pattern Library'),
-            onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const AccountingPage()));
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.library_books_outlined),
+          //   title: const Text('Pattern Library'),
+          //   onTap: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => const PatternLibraryPage()));
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.miscellaneous_services),
             title: const Text('Miscellaneous'),

@@ -2,8 +2,10 @@ import 'package:flutter/rendering.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'database.dart';
 
+
 class BackupAndRestoreController {
   //backup to local storage
+  //could return a date time when backup is complete
 
   //backup to google drive
 
