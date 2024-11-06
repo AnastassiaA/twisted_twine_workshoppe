@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:twisted_twine_workshopppe/Models/Const/database_name_const.dart';
 import 'package:twisted_twine_workshopppe/Models/Const/pattern_library_const.dart';
 
 
@@ -327,7 +328,7 @@ class SQLHelper {
   }
 
   static Future<sql.Database> db() async {
-    return sql.openDatabase('twistedtwinecommissions.db', version: 1,
+    return sql.openDatabase('${DatabaseName.databaseName}.db', version: 1,
         onCreate: (sql.Database database, int version) async {
       await createTables(database);
     }, onConfigure: _onconfigure);
@@ -338,24 +339,11 @@ class SQLHelper {
   }
 
   static Future<String> getDBPath() async {
-    return join(await sql.getDatabasesPath(), 'twistedtwinecommissions.db');
+    return join(await sql.getDatabasesPath(), '${DatabaseName.databaseName}.db');
   }
 
   
-  //TODO: Check if the method below works
-  static Future<void> backupDatabase() async {
-    var externalStatus = await Permission.manageExternalStorage.status;
 
-    if (!externalStatus.isGranted) {
-      await Permission.manageExternalStorage.request();
-    }
-
-    var storageStatus = await Permission.storage.status;
-
-    if (!storageStatus.isGranted) {
-      await Permission.storage.request();
-    }
-  }
 
 
   //Here's some raw code to possibly derive a solution from

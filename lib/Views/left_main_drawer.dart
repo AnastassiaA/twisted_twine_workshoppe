@@ -234,16 +234,16 @@ class LeftMainDrawer extends StatelessWidget {
                       builder: (context) => const AccountingPage()));
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.backup_outlined),
-            title: const Text('Backup and Restore'),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BackupAndRestorePage()));
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.backup_outlined),
+          //   title: const Text('Backup and Restore'),
+          //   onTap: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => BackupAndRestorePage()));
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.settings_outlined),
             title: const Text('Settings'),

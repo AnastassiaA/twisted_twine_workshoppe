@@ -1,4 +1,4 @@
- import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../Controllers/yarn_controller.dart';
 import '../../Models/Models/yarn_model.dart';
 import '../Views/yarn_page.dart';
-
 
 class AddYarn extends StatefulWidget {
   const AddYarn({super.key});
@@ -19,7 +18,32 @@ class AddYarn extends StatefulWidget {
 class AddYarnState extends State<AddYarn> {
   final _formKey = GlobalKey<FormState>();
 
-  String dropdownValue = 'None';
+  //String dropdownValue = 'None';
+  String sizeValue = 'Yarn Size';
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      const DropdownMenuItem(value: "Yarn Size", child: Text("Yarn Size")),
+      const DropdownMenuItem(value: "Lace - 0", child: Text("Lace - 0")),
+      const DropdownMenuItem(
+          value: "Super Fine, Sock, Fingering - 1",
+          child: Text("Super Fine, Sock, Fingering - 1")),
+      const DropdownMenuItem(
+          value: "Fine Weight, Sport, Baby - 2",
+          child: Text("Fine Weight, Sport, Baby - 2")),
+      const DropdownMenuItem(
+          value: "Light, Double Knit (DK) - 3",
+          child: Text("Light, Double Knit (DK) - 3")),
+      const DropdownMenuItem(
+          value: "Medium, Worsted, Aran - 4",
+          child: Text("Medium, Worsted, Aran - 4")),
+      const DropdownMenuItem(value: "Bulky - 5", child: Text("Bulky - 5")),
+      const DropdownMenuItem(
+          value: "Super Bulky - 6", child: Text("Super Bulky - 6")),
+      const DropdownMenuItem(value: "Jumbo - 7", child: Text("Jumbo - 7")),
+    ];
+
+    return menuItems;
+  }
 
   final yarnColorController = TextEditingController();
   final brandController = TextEditingController();
@@ -78,7 +102,7 @@ class AddYarnState extends State<AddYarn> {
         reccHookNeedle: hooknNeedleController.text,
         cost: double.parse(costController.text));
 
-        await YarnController.createYarn(yarn);
+    await YarnController.createYarn(yarn);
   }
 
   @override
@@ -150,14 +174,29 @@ class AddYarnState extends State<AddYarn> {
                     labelText: 'Material',
                   ),
                 ),
-                TextFormField(
-                  controller: sizeController,
-                  keyboardType: TextInputType.text,
-                  showCursor: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Size',
+                
+                Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: DropdownButtonFormField(
+                        hint: const Text("Yarn Size"),
+                        value: sizeValue,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            sizeValue = newValue!;
+                          });
+                        },
+                        items: dropdownItems),
                   ),
-                ),
+                // yarn size/weight
+                //Lace - 0
+                //Super Fine, Sock, Fingering - 1
+                //Fine Weight, Sport, Baby - 2
+                //Light, Double Knit (DK) - 3
+                //Medium, Worsted, Aran - 4
+                //Bulky - 5
+                //Super Bulky - 6
+                //Jumbo - 7
+
                 TextFormField(
                   controller: availableWeightController,
                   keyboardType: TextInputType.number,
@@ -197,18 +236,16 @@ class AddYarnState extends State<AddYarn> {
                       //style: ,
                       onPressed: () async {
                         ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Saving Yarn')));
+                            const SnackBar(content: Text('Saving Yarn')));
 
-                                  _addYarn();
-                                  if (!mounted) return;
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const YarnPage()));
+                        _addYarn();
+                        if (!mounted) return;
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const YarnPage()));
                       },
                       child: const Text("Add Yarn"),
                     ),
