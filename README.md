@@ -1,16 +1,5 @@
 # twisted_twine_workshoppe
 
-A new Flutter project.
+Flutter code of an app for an individual who is looking to have all (primarily) knitting and crochet commission needs in one place.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+A list of features and views can be found [here]{https://github.com/AnastassiaA/twisted_twine_workshoppe_app}
